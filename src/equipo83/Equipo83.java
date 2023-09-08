@@ -12,7 +12,7 @@ public class Equipo83 {
 
 	
 	public static void main(String[] args) {
-		Connection con=Conexion.getConnection();
+		Connection con=Conexion.getConexion();
 	}
 	
 }

@@ -17,16 +17,16 @@ public class Conexion {
 	private static final String db="equipo83";
 	private static final String usuario="root";
 	private static final String password="";
-	private static Connection connection;
+	private static Connection conexion;
 	
 	private Conexion(){}
 	
-	public static Connection getConnection(){
+	public static Connection getConexion(){
 	
-		if(connection==null){
+		if(conexion==null){
 			try {
 				Class.forName("org.mariadb.jdbc.Driver");
-				connection = DriverManager.getConnection(url+db,usuario,password);
+				conexion = DriverManager.getConnection(url+db,usuario,password);
 				
                                 JOptionPane.showMessageDialog(null,"Conectado correctamente.");
 				
@@ -36,7 +36,7 @@ public class Conexion {
                                 JOptionPane.showMessageDialog(null,"Error al conectarse a la Base de Datos.");
                     }
 		}
-                return connection;
+                return conexion;
 	}
 	
 }
