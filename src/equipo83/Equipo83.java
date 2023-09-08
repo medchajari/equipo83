@@ -14,9 +14,10 @@ public class Equipo83 {
 	public static void main(String[] args) {
 		Connection con=Conexion.getConexion();
                 
-                Alumno Juan=new Alumno(33011644,"Perez","Juan", LocalDate.of(1987, 5, 15), true);
+//                Alumno Juan=new Alumno(33011644,"Perez","Juan", LocalDate.of(1987, 5, 15), true);
                 AlumnoData alu = new AlumnoData();
-                alu.guardarAlumno(Juan);
+//                alu.guardarAlumno(Juan);
+//                alu.eliminarAlumno(1);
 	}
 	
 }
