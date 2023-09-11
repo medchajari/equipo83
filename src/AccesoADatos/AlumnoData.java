@@ -103,4 +103,59 @@ public class AlumnoData {
         
     }
     
+    public Alumno buscarAlumno(int id){
+         String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno = ? AND estado=1";
+         Alumno alumno = null;
+         try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+             if (rs.next()) {
+                 
+                 alumno = new Alumno();
+                 alumno.setIdAlumno(id);
+                 alumno.setDni(rs.getInt("dni"));
+                 alumno.setApellido("apellido");
+                 alumno.setNombre("nombre");
+                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                 alumno.setActivo(true);
+             }else{
+                 JOptionPane.showMessageDialog(null,"El alumno no existe.");
+             }
+                 ps.close();
+             
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla de alumno.");
+        }
+         return alumno;
+    }
+    
+    public Alumno buscarAlumnoPorDni(int dni){
+         String sql = "SELECT idAlumno,dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado=1";
+         Alumno alumno = null;
+         try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs=ps.executeQuery();
+             if (rs.next()) {
+                 
+                 alumno = new Alumno();
+                 alumno.setIdAlumno(rs.getInt("idAlumno"));
+                 alumno.setDni(rs.getInt("dni"));
+                 alumno.setApellido("apellido");
+                 alumno.setNombre("nombre");
+                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                 alumno.setActivo(true);
+             }else{
+                 JOptionPane.showMessageDialog(null,"El alumno no existe.");
+             }
+                 ps.close();
+             
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla de alumno.");
+        }
+         return alumno;
+    }
+         
+    
 }
