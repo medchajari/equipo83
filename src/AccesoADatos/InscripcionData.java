@@ -86,28 +86,29 @@ public class InscripcionData {
     
     }
 	 
-	   public void desInscribir (int idInscripcion){
-                                       
-        String sql = "UPDATE inscripcion WHERE idInscripcion = ?";
+	  public void eliminarInscripcion(int idInscripcion) {
+    // Consulta para eliminar una inscripción por su ID
+    String sql = "DELETE FROM inscripcion WHERE idInscripcion = ?";
+    
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idInscripcion);
         
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idInscripcion);
-            int exito=ps.executeUpdate();
-            if (exito>0) {
-                JOptionPane.showMessageDialog(null, "Inscripcion eliminada Exitosamente.");
-                
-            }else {
-		    JOptionPane.showMessageDialog(null, "No se encontró una inscripción con el ID especificado.");
-	    }
-	    ps.close();
-            
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puedo acceder a la tabla Inscripcion.");
+        // Ejecutar la consulta para eliminar la inscripción
+        int exito = ps.executeUpdate();
+        
+        if (exito > 0) {
+            JOptionPane.showMessageDialog(null, "Inscripción eliminada exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró una inscripción con el ID.");
         }
         
+        ps.close();
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al tratar de acceder a la tabla Inscripcion.");
     }
+}
     
     
 }

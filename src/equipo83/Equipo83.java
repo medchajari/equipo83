@@ -37,7 +37,9 @@ public class Equipo83 {
 //			ins.inscribir(tin);
 			
 			//---fin de inscribir
-			ins.desInscribir(4);
+			
+			// eliminar inscripcion
+//			ins.eliminarInscripcion(1);
 	}
 	
 }
