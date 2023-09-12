@@ -1,12 +1,16 @@
 
 package AccesoADatos;
 
+import Entidades.Inscripcion;
 import Entidades.Materia;
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class InscripcionData {
@@ -34,15 +38,76 @@ public class InscripcionData {
 			
 				materia = new Materia();
 				materia.setIdMateria(rs.getInt("idMateria"));
-				
-			
+				materia.setNombre(rs.getString("nombre"));
+				materia.setAnio(rs.getInt("año"));
+				materias.add(materia);
 			}
-			
+			ps.close();			
 			
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"error al obtener Incripciones" + e.getMessage());	
 		}
+		return materias;
 		
 	}
+	
+	
+	 public void inscribir(Inscripcion inscripcion){
+        //consulta para insertar datos
+        String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUE(?,?,?)";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql,java.sql.Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, inscripcion.getIdAlumno());	    
+            ps.setInt(2, inscripcion.getIdMateria());
+            ps.setDouble(3, inscripcion.getNota());
+	    ps.setInt(4, inscripcion.getIdInscripcion());
+            
+            //ejecutamos, enviamos los datos
+            ps.executeUpdate();
+            
+            //obtener la clave
+            ResultSet rs = ps.getGeneratedKeys();
+            
+            //si se pudo agregar setamos el id
+            if(rs.next()){
+                
+                inscripcion.setIdInscripcion(rs.getInt(1));
+                JOptionPane.showMessageDialog(null,"Incsripcion aceptada.");
+            
+            }
+            ps.close();
+            
+            
+            //si nos equivocamos en algun datos nos muestra este error
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al tratar de acceder a la tabla Inscripcion.");
+        }
+    
+    }
+	 
+	   public void desInscribir (int idInscripcion){
+                                       
+        String sql = "UPDATE inscripcion WHERE idInscripcion = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idInscripcion);
+            int exito=ps.executeUpdate();
+            if (exito>0) {
+                JOptionPane.showMessageDialog(null, "Inscripcion eliminada Exitosamente.");
+                
+            }else {
+		    JOptionPane.showMessageDialog(null, "No se encontró una inscripción con el ID especificado.");
+	    }
+	    ps.close();
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puedo acceder a la tabla Inscripcion.");
+        }
+        
+    }
     
     
 }
