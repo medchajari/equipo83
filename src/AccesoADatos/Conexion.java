@@ -16,7 +16,7 @@ public class Conexion {
 	private static final String password="";
 	private static Connection conexion;
 	
-	private Conexion(){}
+	public Conexion(){}
 	
 	public static Connection getConexion(){
 	

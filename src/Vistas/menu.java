@@ -15,6 +15,7 @@ public class menu extends javax.swing.JFrame {
 	 */
 	public menu() {
 		initComponents();
+		setLocationRelativeTo(null);
 	}
 
 	/**
@@ -48,16 +49,21 @@ public class menu extends javax.swing.JFrame {
                 escritorio.setLayout(escritorioLayout);
                 escritorioLayout.setHorizontalGroup(
                         escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+                        .addGap(0, 620, Short.MAX_VALUE)
                 );
                 escritorioLayout.setVerticalGroup(
                         escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 277, Short.MAX_VALUE)
+                        .addGap(0, 373, Short.MAX_VALUE)
                 );
 
                 jMenu1.setText("Alumno");
 
                 jMenuItem1.setText("Formulario de Alumno");
+                jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jMenuItem1MouseClicked(evt);
+                        }
+                });
                 jMenu1.add(jMenuItem1);
 
                 jMenuBar1.add(jMenu1);
@@ -95,15 +101,23 @@ public class menu extends javax.swing.JFrame {
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(escritorio)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(escritorio)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                 );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
+
+        private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
+                // TODO add your handling code here:
+        }//GEN-LAST:event_jMenuItem1MouseClicked
 
 	/**
 	 * @param args the command line arguments
