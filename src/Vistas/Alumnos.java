@@ -67,6 +67,8 @@ public class Alumnos extends javax.swing.JFrame {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+                jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+
                 jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 36)); // NOI18N
                 jLabel1.setForeground(new java.awt.Color(204, 204, 204));
                 jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/alumnos.png"))); // NOI18N
