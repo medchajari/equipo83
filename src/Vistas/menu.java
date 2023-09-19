@@ -4,20 +4,22 @@
  */
 package Vistas;
 
+import AccesoADatos.Conexion;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author MeD Servicios Inf
  */
 public class menu extends javax.swing.JFrame {
 
-	/**
-	 * Creates new form menu
-	 */
 	public menu() {
 		initComponents();
 		setLocationRelativeTo(null);
+		
 	}
-
+private Alumnos Alumnos = new Alumnos(); 
 	/**
 	 * This method is called from within the constructor to initialize the
 	 * form. WARNING: Do NOT modify this code. The content of this method is
@@ -31,7 +33,7 @@ public class menu extends javax.swing.JFrame {
                 escritorio = new javax.swing.JDesktopPane();
                 jMenuBar1 = new javax.swing.JMenuBar();
                 jMenu1 = new javax.swing.JMenu();
-                jMenuItem1 = new javax.swing.JMenuItem();
+                jmAlumno = new javax.swing.JMenuItem();
                 jMenu2 = new javax.swing.JMenu();
                 jMenuItem2 = new javax.swing.JMenuItem();
                 jMenu4 = new javax.swing.JMenu();
@@ -58,13 +60,18 @@ public class menu extends javax.swing.JFrame {
 
                 jMenu1.setText("Alumno");
 
-                jMenuItem1.setText("Formulario de Alumno");
-                jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+                jmAlumno.setText("Formulario de Alumno");
+                jmAlumno.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
-                                jMenuItem1MouseClicked(evt);
+                                jmAlumnoMouseClicked(evt);
                         }
                 });
-                jMenu1.add(jMenuItem1);
+                jmAlumno.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jmAlumnoActionPerformed(evt);
+                        }
+                });
+                jMenu1.add(jmAlumno);
 
                 jMenuBar1.add(jMenu1);
 
@@ -115,9 +122,14 @@ public class menu extends javax.swing.JFrame {
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
-                // TODO add your handling code here:
-        }//GEN-LAST:event_jMenuItem1MouseClicked
+        private void jmAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAlumnoMouseClicked
+    
+        }//GEN-LAST:event_jmAlumnoMouseClicked
+
+        private void jmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoActionPerformed
+               Alumnos admin = new Alumnos();
+			    admin.setVisible(true);
+        }//GEN-LAST:event_jmAlumnoActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -163,10 +175,10 @@ public class menu extends javax.swing.JFrame {
         private javax.swing.JMenu jMenu5;
         private javax.swing.JMenu jMenu6;
         private javax.swing.JMenuBar jMenuBar1;
-        private javax.swing.JMenuItem jMenuItem1;
         private javax.swing.JMenuItem jMenuItem2;
         private javax.swing.JMenuItem jMenuItem3;
         private javax.swing.JMenuItem jMenuItem4;
         private javax.swing.JMenuItem jMenuItem5;
+        private javax.swing.JMenuItem jmAlumno;
         // End of variables declaration//GEN-END:variables
 }

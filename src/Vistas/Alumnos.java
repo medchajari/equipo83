@@ -60,12 +60,14 @@ public class Alumnos extends javax.swing.JFrame {
                 btnSalirAlumno = new javax.swing.JButton();
                 btnBuscarAlumno = new javax.swing.JButton();
                 btnModificar = new javax.swing.JButton();
-                txtIdAlumno = new javax.swing.JTextField();
                 jLabel7 = new javax.swing.JLabel();
+                labIdAlumno = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+                jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 36)); // NOI18N
+                jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+                jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/alumnos.png"))); // NOI18N
                 jLabel1.setText("Alumnos");
 
                 jLabel2.setText("DNI");
@@ -80,7 +82,7 @@ public class Alumnos extends javax.swing.JFrame {
 
                 radioCursando.setText("Cursando");
 
-                btnNuevoAlumno.setText("Nuevo");
+                btnNuevoAlumno.setText("Limpiar Campos");
                 btnNuevoAlumno.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 btnNuevoAlumnoActionPerformed(evt);
@@ -102,6 +104,11 @@ public class Alumnos extends javax.swing.JFrame {
                 });
 
                 btnSalirAlumno.setText("Salir");
+                btnSalirAlumno.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnSalirAlumnoActionPerformed(evt);
+                        }
+                });
 
                 btnBuscarAlumno.setText("Buscar");
                 btnBuscarAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +125,8 @@ public class Alumnos extends javax.swing.JFrame {
                 });
 
                 jLabel7.setText("ID Alumno");
+
+                labIdAlumno.setText("----");
 
                 jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
                 jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -136,60 +145,59 @@ public class Alumnos extends javax.swing.JFrame {
                 jDesktopPane1.setLayer(btnSalirAlumno, javax.swing.JLayeredPane.DEFAULT_LAYER);
                 jDesktopPane1.setLayer(btnBuscarAlumno, javax.swing.JLayeredPane.DEFAULT_LAYER);
                 jDesktopPane1.setLayer(btnModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-                jDesktopPane1.setLayer(txtIdAlumno, javax.swing.JLayeredPane.DEFAULT_LAYER);
                 jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+                jDesktopPane1.setLayer(labIdAlumno, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
                 javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
                 jDesktopPane1.setLayout(jDesktopPane1Layout);
                 jDesktopPane1Layout.setHorizontalGroup(
                         jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(191, 191, 191)
-                                                .addComponent(jLabel1))
+                                .addGap(27, 27, 27)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                .addGap(43, 43, 43)
-                                                                .addComponent(btnNuevoAlumno)
+                                                                .addComponent(btnGuardarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(btnGuardarAlumno)
+                                                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(btnEliminarAlumno))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                                .addGap(130, 130, 130)
-                                                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btnSalirAlumno))
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(27, 27, 27)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel2)
-                                                        .addComponent(jLabel3)
-                                                        .addComponent(jLabel4)
-                                                        .addComponent(jLabel5)
-                                                        .addComponent(jLabel6)
-                                                        .addComponent(jLabel7))
-                                                .addGap(39, 39, 39)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(txtNombre)
-                                                        .addComponent(txtApellido)
-                                                        .addComponent(radioCursando)
-                                                        .addComponent(dateFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(btnEliminarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(btnBuscarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
-                                                        .addComponent(txtIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap(47, Short.MAX_VALUE))
+                                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel2)
+                                                                        .addComponent(jLabel3)
+                                                                        .addComponent(jLabel4)
+                                                                        .addComponent(jLabel5)
+                                                                        .addComponent(jLabel6)
+                                                                        .addComponent(jLabel7))
+                                                                .addGap(39, 39, 39)
+                                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                        .addComponent(txtNombre)
+                                                                        .addComponent(txtApellido)
+                                                                        .addComponent(radioCursando)
+                                                                        .addComponent(dateFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                                                .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(btnBuscarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                                                                .addGap(9, 9, 9)
+                                                                                .addComponent(labIdAlumno)
+                                                                                .addGap(131, 131, 131)
+                                                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                                        .addComponent(btnNuevoAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                        .addComponent(btnSalirAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                                .addGap(16, 16, 16)))
+                                .addContainerGap(16, Short.MAX_VALUE))
                 );
                 jDesktopPane1Layout.setVerticalGroup(
                         jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
                                         .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,26 +218,29 @@ public class Alumnos extends javax.swing.JFrame {
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel6)
                                         .addComponent(dateFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addGap(11, 11, 11)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(labIdAlumno)
+                                        .addComponent(btnNuevoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14)
+                                .addComponent(btnSalirAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnNuevoAlumno)
-                                        .addComponent(btnGuardarAlumno)
-                                        .addComponent(btnEliminarAlumno)
-                                        .addComponent(btnSalirAlumno))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnModificar)
-                                .addGap(67, 67, 67))
+                                        .addComponent(btnGuardarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnEliminarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27))
                 );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jDesktopPane1)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jDesktopPane1)
+                                .addContainerGap())
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,15 +261,14 @@ public class Alumnos extends javax.swing.JFrame {
             java.util.Date fechaNacimientoUtil = java.sql.Date.valueOf(alumno.getFechaNacimiento());
             dateFechaNacimiento.setDate(fechaNacimientoUtil);
             radioCursando.setSelected(alumno.isActivo());
-	    txtIdAlumno.setText(String.valueOf(alumno.getIdAlumno()));
+	    labIdAlumno.setText(String.valueOf(alumno.getIdAlumno()));
         } else {
             JOptionPane.showMessageDialog(this, "Por favor verifique el DNI e intente nuevamente.");
         }
         }//GEN-LAST:event_btnBuscarAlumnoActionPerformed
 
         private void btnNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoAlumnoActionPerformed
-                // TODO add your handling code here:
-		
+		limpiarCampos();
 		 
         }//GEN-LAST:event_btnNuevoAlumnoActionPerformed
 
@@ -322,6 +332,10 @@ public class Alumnos extends javax.swing.JFrame {
     }
         }//GEN-LAST:event_btnEliminarAlumnoActionPerformed
 
+        private void btnSalirAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirAlumnoActionPerformed
+              this.dispose();
+        }//GEN-LAST:event_btnSalirAlumnoActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -380,10 +394,10 @@ public class Alumnos extends javax.swing.JFrame {
         private javax.swing.JLabel jLabel5;
         private javax.swing.JLabel jLabel6;
         private javax.swing.JLabel jLabel7;
+        public javax.swing.JLabel labIdAlumno;
         public javax.swing.JRadioButton radioCursando;
         public javax.swing.JTextField txtApellido;
         public javax.swing.JTextField txtDni;
-        public javax.swing.JTextField txtIdAlumno;
         public javax.swing.JTextField txtNombre;
         // End of variables declaration//GEN-END:variables
 
@@ -393,13 +407,13 @@ private void limpiarCampos() {
     txtNombre.setText("");
     dateFechaNacimiento.setDate(null);  // Para limpiar el JDateChooser
     radioCursando.setSelected(false);
-    txtIdAlumno.setText("");
+    labIdAlumno.setText("---");
 }
 
 private int obtenerIdAlumno() {
     try {
         // Supongamos que puedes obtener el ID del alumno de algún componente en tu interfaz gráfica
-        return Integer.parseInt(txtIdAlumno.getText());
+        return Integer.parseInt(labIdAlumno.getText());
     } catch (NumberFormatException e) {
         return -1;  // Retorna -1 si no se puede convertir a entero (por ejemplo, si no es un número válido)
     }
