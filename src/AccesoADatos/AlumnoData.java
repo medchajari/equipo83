@@ -21,6 +21,10 @@ public class AlumnoData {
     public AlumnoData(){        
         con=Conexion.getConexion();    
     }
+
+	public AlumnoData(Conexion conexion) {
+		
+	}
     
     //metodos
     public void guardarAlumno(Alumno alumno){
@@ -157,9 +161,10 @@ public class AlumnoData {
          return alumno;
     }
     
-    public List <Alumno> listarAlumnos(){
-         String sql = "SELECT idAlumno,dni, apellido, nombre, fechaNacimiento FROM alumno WHERE estado=1";
+    public ArrayList <Alumno> listarAlumnos(){
+         
          ArrayList <Alumno> alumnos = new ArrayList<>();
+	 String sql = "SELECT * FROM alumno WHERE estado=1 ORDER BY apellido";
          try {
             PreparedStatement ps=con.prepareStatement(sql);            
             ResultSet rs=ps.executeQuery();
@@ -177,8 +182,8 @@ public class AlumnoData {
              }
                  ps.close();
              
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla de alumno.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"(25)Error al acceder a la tabla de alumno.");
         }
          return alumnos;
     }

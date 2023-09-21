@@ -4,10 +4,6 @@
  */
 package Vistas;
 
-import AccesoADatos.Conexion;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  *
  * @author MeD Servicios Inf

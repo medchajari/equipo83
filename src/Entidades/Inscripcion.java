@@ -4,29 +4,23 @@ package Entidades;
 public class Inscripcion {
 	
 	private int idInscripcion;
-	private int idAlumno;
-	private int idMateria;
+	private Alumno alumno;
+	private Materia materia;
 	private double nota;
 
 	public Inscripcion() {
 	}
 
-	public Inscripcion(int idAlumno, int idMateria, double nota) {
-		this.idAlumno = idAlumno;
-		this.idMateria = idMateria;
+	public Inscripcion(Alumno alumno, Materia materia, double nota) {
+		this.alumno = alumno;
+		this.materia = materia;
 		this.nota = nota;
 	}
-	
 
-	public Inscripcion(int idInscripcion, int idAlumno, int idMateria, double nota) {
+	public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
 		this.idInscripcion = idInscripcion;
-		this.idAlumno = idAlumno;
-		this.idMateria = idMateria;
-		this.nota = nota;
-	}
-	
-
-	public Inscripcion(double nota) {
+		this.alumno = alumno;
+		this.materia = materia;
 		this.nota = nota;
 	}
 
@@ -38,20 +32,20 @@ public class Inscripcion {
 		this.idInscripcion = idInscripcion;
 	}
 
-	public int getIdAlumno() {
-		return idAlumno;
+	public Alumno getAlumno() {
+		return alumno;
 	}
 
-	public void setIdAlumno(int idAlumno) {
-		this.idAlumno = idAlumno;
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
 	}
 
-	public int getIdMateria() {
-		return idMateria;
+	public Materia getMateria() {
+		return materia;
 	}
 
-	public void setIdMateria(int idMateria) {
-		this.idMateria = idMateria;
+	public void setMateria(Materia materia) {
+		this.materia = materia;
 	}
 
 	public double getNota() {
@@ -61,10 +55,40 @@ public class Inscripcion {
 	public void setNota(double nota) {
 		this.nota = nota;
 	}
+
+	@Override
+	public int hashCode() {
+		int hash = 5;
+		hash = 79 * hash + this.idInscripcion;
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Inscripcion other = (Inscripcion) obj;
+		return this.idInscripcion == other.idInscripcion;
+	}
 	
-	  @Override
-    public String toString() {		
-		return "Alumno{" + ", idInscripcion=" +idInscripcion+ ", idAlumno=" + idAlumno +" , idMateria=" +idMateria+ " , nota=" + nota + '}';
-    }
+	
+
+	@Override
+	public String toString() {
+		return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", alumno=" + alumno + ", materia=" + materia + ", nota=" + nota + '}';
+	}
+	
+	
+	
+	
+
+	
     
 }
