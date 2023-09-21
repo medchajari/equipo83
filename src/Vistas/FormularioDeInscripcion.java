@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-//https://youtu.be/iISbOY0Kbxw
+
 package Vistas;
 
 import AccesoADatos.AlumnoData;
 import AccesoADatos.InscripcionData;
+import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
@@ -19,11 +20,12 @@ import javax.swing.table.DefaultTableModel;
 //atributo
 public class FormularioDeInscripcion extends javax.swing.JFrame {
 		private InscripcionData insData;
+		private Inscripcion inscripcion;
 		private ArrayList<Inscripcion> listaInscripcion;
-//		private ArrayList<Materia> listaMaterias;
+		private ArrayList<Materia> listaMaterias;
 		private DefaultTableModel modelo;
 		
-//		private MateriaData materiaData;
+		private MateriaData materiaData;
 		private AlumnoData aluData;
 		private List<Alumno> listaAlumnos;		
 		
@@ -33,10 +35,12 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 	public FormularioDeInscripcion() {
 		initComponents();
 		aluData=new AlumnoData();
+		
 		//guardamos en atributo listaAlumno
 		listaAlumnos =(List<Alumno>) aluData.listarAlumnos();
 		modelo = new DefaultTableModel();
 		insData = new InscripcionData();
+		inscripcion = new Inscripcion();
 		
 		setLocationRelativeTo(null);
 		cargarAlumnos();
@@ -122,8 +126,18 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
                 jScrollPane1.setViewportView(tableInscripcion);
 
                 btnInscribir.setText("Inscribir");
+                btnInscribir.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnInscribirActionPerformed(evt);
+                        }
+                });
 
                 btnAnularInscripcion.setText("Anular inscripcion");
+                btnAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnAnularInscripcionActionPerformed(evt);
+                        }
+                });
 
                 btnSalirInscripcion.setText("Salir");
                 btnSalirInscripcion.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +240,8 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
         private void cbxAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAlumnosActionPerformed
                 // TODO add your handling code here:
 		borrarFilas();
+		radioMateriasInscriptas.setSelected(false);
+		radioMateriasNoInscriptas.setSelected(false);
 		
         }//GEN-LAST:event_cbxAlumnosActionPerformed
 
@@ -234,7 +250,8 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 		radioMateriasInscriptas.setSelected(false);
 		btnInscribir.setEnabled(true);
 		btnAnularInscripcion.setEnabled(false);
-		cargarMateriasNoinscriptas();
+		
+		cargaDatosNoInscriptas();
         }//GEN-LAST:event_radioMateriasNoInscriptasActionPerformed
 
         private void radioMateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMateriasInscriptasActionPerformed
@@ -242,13 +259,45 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 		radioMateriasNoInscriptas.setSelected(false);
 		btnInscribir.setEnabled(false);
 		btnAnularInscripcion.setEnabled(true);
-		cargarMateriasInscriptas();
+		cargaDatosInscriptas();
         }//GEN-LAST:event_radioMateriasInscriptasActionPerformed
 
         private void btnSalirInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirInscripcionActionPerformed
                 // TODO add your handling code here:
 		dispose();
         }//GEN-LAST:event_btnSalirInscripcionActionPerformed
+
+        private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
+                // TODO add your handling code here:
+		int filaselecionada = tableInscripcion.getSelectedRow();
+		Alumno a = (Alumno) cbxAlumnos.getSelectedItem();
+		if(filaselecionada != -1 && a!=null){
+			
+			int idMateria = (Integer) modelo.getValueAt(filaselecionada,0);
+			String nombreMateria = (String) modelo.getValueAt(filaselecionada,1);
+			int anio = (Integer) modelo.getValueAt(filaselecionada, 2);
+			Materia ma = new Materia(idMateria, nombreMateria, anio, true);
+			
+ 			Inscripcion i = new Inscripcion(ma,a,-1);
+			
+			insData.guardarInscripcion(i);
+		}else{
+			JOptionPane.showMessageDialog(this,"Selecciona un alumno y/o una materia.");
+		}
+        }//GEN-LAST:event_btnInscribirActionPerformed
+
+        private void btnAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularInscripcionActionPerformed
+                int filaseleccionada = tableInscripcion.getSelectedRow();
+    Alumno a = (Alumno) cbxAlumnos.getSelectedItem();
+    
+    if (filaseleccionada != -1 && a != null) {
+        int idMateria = (Integer) modelo.getValueAt(filaseleccionada, 0);
+        int idAlumno = a.getIdAlumno(); 
+
+        insData.eliminarInscripcion(idAlumno, idMateria);  
+        borrarFilas();
+    }
+        }//GEN-LAST:event_btnAnularInscripcionActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -287,7 +336,7 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnAnularInscripcion;
-        private javax.swing.JButton btnInscribir;
+        public javax.swing.JButton btnInscribir;
         private javax.swing.JButton btnSalirInscripcion;
         public javax.swing.JComboBox<Alumno> cbxAlumnos;
         private javax.swing.JLabel jLabel1;
@@ -314,6 +363,7 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 		columnas.add("idMateria");
 		columnas.add("nombre");
 		columnas.add("anio");
+		columnas.add("idInscripcion");
 		
 		//recorrer arreglo y uso eso de titulo
 		
@@ -335,36 +385,37 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 		}
 	}
 	
-	private void cargarMateriasNoinscriptas(){
-	borrarFilas();
-	Alumno seleccionado = (Alumno) cbxAlumnos.getSelectedItem();
-	if(seleccionado!= null){
-	ArrayList<Materia> lista =(ArrayList) insData.obtenerMateriasNoInscriptas(seleccionado);
-	for(Materia mat: lista){
-		modelo.addRow(new Object[]{mat.getIdMateria(),mat.getNombre(), mat.getAnio()});
+
+	
+	public void cargaDatosInscriptas(){
+        borrarFilas();
+        //Llenar filas
+        InscripcionData cd =new InscripcionData();
+        Alumno seleccionado=(Alumno)cbxAlumnos.getSelectedItem();
+        listaMaterias = (ArrayList)cd.obtenerMateriasInscriptas(seleccionado.getIdAlumno());
+        
+        for(Materia m:listaMaterias){
+        
+            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombre(), m.getAnio()});
+		}
 	}
 	
-	}else{
-		JOptionPane.showMessageDialog(this,"Debe seleccionar un alumno.");
-	}
-	
+	public void cargaDatosNoInscriptas(){
+        borrarFilas();
+        //Llenar filas
+        InscripcionData cd =new InscripcionData();
+        Alumno seleccionado=(Alumno)cbxAlumnos.getSelectedItem();
+        listaMaterias = (ArrayList)cd.obtenerMateriasNoInscriptas(seleccionado.getIdAlumno());
+        
+        for(Materia m:listaMaterias){
+        
+            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombre(), m.getAnio()});
+		}
 	}
 
-	private void cargarMateriasInscriptas() {
 	
-	borrarFilas();
-	Alumno seleccionado = (Alumno) cbxAlumnos.getSelectedItem();
-	if(seleccionado!= null){
-	ArrayList<Materia> lista =(ArrayList) insData.obtenerMateriasInscriptas(seleccionado);
-	for(Materia mat: lista){
-		modelo.addRow(new Object[]{mat.getIdMateria(),mat.getNombre(), mat.getAnio()});
-	}
+
 	
-	}else{
-		JOptionPane.showMessageDialog(this,"Debe seleccionar un alumno.");
-	}
-	
-	}
 
 
 

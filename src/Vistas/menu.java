@@ -33,7 +33,7 @@ private Alumnos Alumnos = new Alumnos();
                 jMenu2 = new javax.swing.JMenu();
                 jMenuItem2 = new javax.swing.JMenuItem();
                 jMenu4 = new javax.swing.JMenu();
-                jMenuItem3 = new javax.swing.JMenuItem();
+                jmenuManejoDeInscripciones = new javax.swing.JMenuItem();
                 jMenuItem4 = new javax.swing.JMenuItem();
                 jMenu5 = new javax.swing.JMenu();
                 jMenuItem5 = new javax.swing.JMenuItem();
@@ -80,8 +80,13 @@ private Alumnos Alumnos = new Alumnos();
 
                 jMenu4.setText("Administracion");
 
-                jMenuItem3.setText("Manejo de Inscripciones");
-                jMenu4.add(jMenuItem3);
+                jmenuManejoDeInscripciones.setText("Manejo de Inscripciones");
+                jmenuManejoDeInscripciones.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jmenuManejoDeInscripcionesActionPerformed(evt);
+                        }
+                });
+                jMenu4.add(jmenuManejoDeInscripciones);
 
                 jMenuItem4.setText("Manipulacion deNotas");
                 jMenu4.add(jMenuItem4);
@@ -126,6 +131,13 @@ private Alumnos Alumnos = new Alumnos();
                Alumnos admin = new Alumnos();
 			    admin.setVisible(true);
         }//GEN-LAST:event_jmAlumnoActionPerformed
+
+        private void jmenuManejoDeInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuManejoDeInscripcionesActionPerformed
+                // TODO add your handling code here:
+		FormularioDeInscripcion fdi = new FormularioDeInscripcion();
+			    fdi.setVisible(true);
+		
+        }//GEN-LAST:event_jmenuManejoDeInscripcionesActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -172,9 +184,9 @@ private Alumnos Alumnos = new Alumnos();
         private javax.swing.JMenu jMenu6;
         private javax.swing.JMenuBar jMenuBar1;
         private javax.swing.JMenuItem jMenuItem2;
-        private javax.swing.JMenuItem jMenuItem3;
         private javax.swing.JMenuItem jMenuItem4;
         private javax.swing.JMenuItem jMenuItem5;
         private javax.swing.JMenuItem jmAlumno;
+        private javax.swing.JMenuItem jmenuManejoDeInscripciones;
         // End of variables declaration//GEN-END:variables
 }

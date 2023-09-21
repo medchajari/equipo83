@@ -4,6 +4,7 @@ package AccesoADatos;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +53,7 @@ public class InscripcionData {
 				materia = new Materia();
 				materia.setIdMateria(rs.getInt("idMateria"));
 				materia.setNombre(rs.getString("nombre"));
-				materia.setAnio(rs.getInt("año"));
+				materia.setAnio(rs.getInt("anio"));
 				materias.add(materia);
 			}
 			ps.close();			
@@ -94,8 +95,8 @@ public class InscripcionData {
             
             
             //si nos equivocamos en algun datos nos muestra este error
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "El alumno ya esta inscripto en esta materia."+ e.getMessage());
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "(29)El alumno se ha inscripto");
         }
 	return insc;
     }
@@ -121,13 +122,14 @@ public class InscripcionData {
 		 return modif;
 	 }
 	 
-	public void eliminarInscripcion(int idInscripcion) {
+	public void eliminarInscripcion(int idAlumno, int idMateria) {
     // Consulta para eliminar una inscripción por su ID
-    String sql = "DELETE FROM inscripcion WHERE idInscripcion = ?";
+    String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria=?";
     
     try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, idInscripcion);
+        PreparedStatement ps = con.prepareStatement(sql);        
+	ps.setInt(1, idAlumno);
+	ps.setInt(2, idMateria);
         
         // Ejecutar la consulta para eliminar la inscripción
         int exito = ps.executeUpdate();
@@ -135,7 +137,7 @@ public class InscripcionData {
         if (exito > 0) {
             JOptionPane.showMessageDialog(null, "Inscripción eliminada exitosamente.");
         } else {
-            JOptionPane.showMessageDialog(null, "No se encontró una inscripción con el ID.");
+            JOptionPane.showMessageDialog(null, "(13)No se encontró una inscripción con el ID.");
         }
         
         ps.close();
@@ -205,7 +207,7 @@ public class InscripcionData {
 	
 	}
 	
-	public List<Materia> obtenerMateriasNoInscriptas(Alumno a){
+	public List<Materia> obtenerMateriasNoInscriptas(int id){
 	List<Materia> materiasNo = new ArrayList<Materia>();
 		
 	Materia ma;
@@ -213,7 +215,7 @@ public class InscripcionData {
 	
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, a.getIdAlumno());
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			Materia materia;
 			while(rs.next()){

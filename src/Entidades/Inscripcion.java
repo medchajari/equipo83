@@ -23,6 +23,12 @@ public class Inscripcion {
 		this.materia = materia;
 		this.nota = nota;
 	}
+	
+	public Inscripcion(Materia materia, Alumno alumno, int idInscripcion) {
+        this.materia = materia;
+        this.alumno = alumno;
+        this.idInscripcion = idInscripcion;
+    }
 
 	public int getIdInscripcion() {
 		return idInscripcion;
