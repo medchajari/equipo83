@@ -23,7 +23,6 @@ public class InscripcionData {
 	private AlumnoData  ad;
 	private MateriaData md;
 	private PreparedStatement ps;
-	
     
     //Construcctor de conexion
 	public InscripcionData(){        
@@ -101,25 +100,29 @@ public class InscripcionData {
 	return insc;
     }
  
-	public boolean actualizarNota(Alumno al, Materia mat, double nota){
-		 boolean modif=false;
-		 
-		 try {
-			 String sql = "UPDATE inscripcion SET nota=? WHERE idAlumno=? and idMateria=?";
-			 PreparedStatement ps=con.prepareStatement(sql);
-			 ps.setDouble(1, nota);
-			 ps.setInt(2, al.getIdAlumno());
-			 ps.setInt(3, mat.getIdMateria());
-			 
-			 int filas=ps.executeUpdate();
-			 if (filas>0) {
-				 JOptionPane.showMessageDialog(null, "Nota Actualizada."); 
-			 }
-			 ps.close();
-			 
-		 } catch (Exception e) {
-		 }
-		 return modif;
+	public List<Inscripcion> actualizarNota(int idAlumno, int idMateria, double nota){
+		 List<Inscripcion> inscripciones = new ArrayList<>();
+    try {
+        String sql = "UPDATE inscripcion SET nota=? WHERE idAlumno=? AND idMateria=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setDouble(1, nota);
+        ps.setInt(2, idAlumno);
+        ps.setInt(3, idMateria);
+
+        int filas = ps.executeUpdate();
+        if (filas > 0) {
+            JOptionPane.showMessageDialog(null, "Nota actualizada.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró una inscripción con el ID de alumno y materia proporcionados.");
+        }
+        ps.close();
+
+        // Aquí deberías obtener las inscripciones actualizadas, pero parece que no estás haciendo eso en tu código actual.
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar la nota: " + e.getMessage());
+    }
+    return inscripciones;
 	 }
 	 
 	public void eliminarInscripcion(int idAlumno, int idMateria) {
@@ -147,7 +150,7 @@ public class InscripcionData {
     }
 }
 	  
-	public List<Inscripcion> obtenerInscripciones(){
+	public List<Inscripcion> obtenerInscripciones(Materia ma){
 	  List<Inscripcion> inscripciones= new ArrayList<Inscripcion>();  
 	  
 	  
@@ -178,6 +181,8 @@ public class InscripcionData {
 		  }
 	   return inscripciones;
 	  }
+	
+	
 	
 	public List<Materia> obtenerMateriasInscriptas(Alumno a){
 	List<Materia> materias = new ArrayList<Materia>();
@@ -234,6 +239,33 @@ public class InscripcionData {
 		return materiasNo;
 	
 	}
+	
+	public List<Inscripcion> obtenerMateriasNotas(Inscripcion id){
+	List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+		
+	Inscripcion ins;
+	String sql = "SELECT *FROM inscripcion WHERE estado=1 ";
+	
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id.getIdInscripcion());
+			ResultSet rs = ps.executeQuery();
+			Inscripcion insc;
+			while(rs.next()){
+			
+				insc = new Inscripcion();
+				insc.setIdInscripcion(rs.getInt("idInscripcion"));				
+				insc.setNota(0);
+				inscripciones.add(insc);
+			}
+			ps.close();			
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"(11) error al obtener Inscripciones" + e.getMessage());	
+		}
+		return inscripciones;
+	
+	}
 	  
 	public List<Inscripcion> obtenerInscripcionesXMateria(int idMateria){
 		  List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
@@ -267,6 +299,37 @@ public class InscripcionData {
 		return inscripciones;
 		  
 	  }
+	
+	public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
+    List<Inscripcion> inscripciones = new ArrayList<>();
+    try {
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idAlumno);
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int idMateria = rs.getInt("idMateria");
+            int idInscripcion = rs.getInt("idInscripcion");  // Supongamos que hay una columna llamada idInscripcion en tu tabla
+            double nota = rs.getDouble("nota");
+            // ... Obtén otros campos de la inscripción según sea necesario
+
+            // Aquí asumo que tienes métodos para obtener una Materia y un Alumno dados sus IDs
+            Materia materia = (Materia) obtenerInscripcionesXMateria(idMateria);
+            Alumno alumno = (Alumno) obtenerMateriasInscriptas(idAlumno);
+
+            // Crea una instancia de Inscripcion y agrega a la lista
+             Inscripcion inscripcion = new Inscripcion(idInscripcion, materia, alumno, nota);
+            inscripciones.add(inscripcion);
+        }
+
+        rs.close();
+       
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al obtener inscripciones: " + e.getMessage());
+    }
+    return inscripciones;
+}
 	
 	
     

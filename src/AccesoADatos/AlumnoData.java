@@ -9,14 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 
 public class AlumnoData {    
     
     private Connection con = null;
-    
     //Construcctor de conexion
     public AlumnoData(){        
         con=Conexion.getConexion();    

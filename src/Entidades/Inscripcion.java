@@ -30,6 +30,10 @@ public class Inscripcion {
         this.idInscripcion = idInscripcion;
     }
 
+	public Inscripcion(int idInscripcion, Materia materia, Alumno alumno, double nota) {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+	}
+
 	public int getIdInscripcion() {
 		return idInscripcion;
 	}

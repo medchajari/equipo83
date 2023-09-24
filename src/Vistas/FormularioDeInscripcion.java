@@ -240,8 +240,9 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
         private void cbxAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAlumnosActionPerformed
                 // TODO add your handling code here:
 		borrarFilas();
-		radioMateriasInscriptas.setSelected(false);
-		radioMateriasNoInscriptas.setSelected(false);
+		radioMateriasInscriptas.setSelected(true);
+		radioMateriasNoInscriptas.setSelected(false);		
+		cargaDatosInscriptas();
 		
         }//GEN-LAST:event_cbxAlumnosActionPerformed
 
@@ -284,6 +285,9 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 		}else{
 			JOptionPane.showMessageDialog(this,"Selecciona un alumno y/o una materia.");
 		}
+		radioMateriasNoInscriptas.setSelected(true);
+	radioMateriasInscriptas.setSelected(false);
+	cargaDatosNoInscriptas();
         }//GEN-LAST:event_btnInscribirActionPerformed
 
         private void btnAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularInscripcionActionPerformed
@@ -296,6 +300,9 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 
         insData.eliminarInscripcion(idAlumno, idMateria);  
         borrarFilas();
+	radioMateriasNoInscriptas.setSelected(false);
+	radioMateriasInscriptas.setSelected(true);
+	cargaDatosInscriptas();
     }
         }//GEN-LAST:event_btnAnularInscripcionActionPerformed
 
@@ -363,7 +370,6 @@ public class FormularioDeInscripcion extends javax.swing.JFrame {
 		columnas.add("idMateria");
 		columnas.add("nombre");
 		columnas.add("anio");
-		columnas.add("idInscripcion");
 		
 		//recorrer arreglo y uso eso de titulo
 		

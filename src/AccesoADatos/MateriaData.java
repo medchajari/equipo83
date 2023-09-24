@@ -46,6 +46,8 @@ public MateriaData(){
         }
          return materia;
     }
+ 
+
 
 
 }
