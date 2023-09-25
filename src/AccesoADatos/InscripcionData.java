@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -20,12 +18,16 @@ public class InscripcionData {
 	
 	private Connection con;
 	private Conexion conexion;
-	private AlumnoData  ad;
-	private MateriaData md;
+	private AlumnoData  ad = new AlumnoData();
+	private MateriaData md = new MateriaData();
 	private PreparedStatement ps;
+	
     
     //Construcctor de conexion
-	public InscripcionData(){        
+	public InscripcionData(){  
+		
+		
+		
         try {
 			this.conexion=conexion;
 			this.con = conexion.getConexion();
@@ -182,8 +184,6 @@ public class InscripcionData {
 	   return inscripciones;
 	  }
 	
-	
-	
 	public List<Materia> obtenerMateriasInscriptas(Alumno a){
 	List<Materia> materias = new ArrayList<Materia>();
 		
@@ -301,33 +301,42 @@ public class InscripcionData {
 	  }
 	
 	public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
-    List<Inscripcion> inscripciones = new ArrayList<>();
+     List<Inscripcion> inscripciones = new ArrayList<>();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
     try {
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno=?";
-        PreparedStatement ps = con.prepareStatement(sql);
+        String sql = "SELECT idInscripcion, idMateria, nota FROM inscripcion WHERE idAlumno=?";
+        ps = con.prepareStatement(sql);
         ps.setInt(1, idAlumno);
 
-        ResultSet rs = ps.executeQuery();
+        rs = ps.executeQuery();
         while (rs.next()) {
+            int idInscripcion = rs.getInt("idInscripcion");
             int idMateria = rs.getInt("idMateria");
-            int idInscripcion = rs.getInt("idInscripcion");  // Supongamos que hay una columna llamada idInscripcion en tu tabla
             double nota = rs.getDouble("nota");
-            // ... Obtén otros campos de la inscripción según sea necesario
 
-            // Aquí asumo que tienes métodos para obtener una Materia y un Alumno dados sus IDs
-            Materia materia = (Materia) obtenerInscripcionesXMateria(idMateria);
-            Alumno alumno = (Alumno) obtenerMateriasInscriptas(idAlumno);
+            // Obtener la materia y el alumno
+            Materia materia = md.buscarMateria(idMateria);
+            Alumno alumno = ad.buscarAlumno(idAlumno);
 
-            // Crea una instancia de Inscripcion y agrega a la lista
-             Inscripcion inscripcion = new Inscripcion(idInscripcion, materia, alumno, nota);
+            // Crear una instancia de Inscripcion y agregar a la lista
+            Inscripcion inscripcion = new Inscripcion(idInscripcion, materia, alumno, nota);
             inscripciones.add(inscripcion);
         }
 
-        rs.close();
-       
-    } catch (Exception e) {
+    } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al obtener inscripciones: " + e.getMessage());
+    } finally {
+        // Cerrar los recursos en un bloque finally
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cerrar recursos: " + e.getMessage());
+        }
     }
+
     return inscripciones;
 }
 	

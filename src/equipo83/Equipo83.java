@@ -22,19 +22,22 @@ public class Equipo83 {
 
 //                 ---listar alumnos
 
-                    AlumnoData alu = new AlumnoData();
-                    for(Alumno alumno:alu.listarAlumnos()){
-                        System.out.println("Numero de Dni: "+alumno.getDni());
-                        System.out.println(alumno.getApellido() + " " + alumno.getNombre());
-                        
-                        System.out.println("Nacido el: " + alumno.getFechaNacimiento());
-			    System.out.println("-------------------------");
-                    }
+//                    AlumnoData alu = new AlumnoData();
+//                    for(Alumno alumno:alu.listarAlumnos()){
+//                        System.out.println("Numero de Dni: "+alumno.getDni());
+//                        System.out.println(alumno.getApellido() + " " + alumno.getNombre());
+//                        
+//                        System.out.println("Nacido el: " + alumno.getFechaNacimiento());
+//			    System.out.println("-------------------------");
+//                    }
 
 			/// --- inscribir
-//			InscripcionData ins = new InscripcionData();
+			InscripcionData ins = new InscripcionData();
 //			Inscripcion tin=new Inscripcion(2, 1, 5.5);
 //			ins.inscribir(tin);
+
+ins.obtenerInscripcionesPorAlumno(5);
+
 			
 			//---fin de inscribir
 			

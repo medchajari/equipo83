@@ -86,10 +86,12 @@ public class Alumno {
     
     //tostring sin campos de fecha y estado
 
-    @Override
-    public String toString() {
-        return   apellido  +" "+ nombre+" - DNI: "+dni;
-    }
+	@Override
+	public String toString() {
+		return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", activo=" + activo + '}';
+	}
+
+    
     
     
     

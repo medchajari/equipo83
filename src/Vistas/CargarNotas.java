@@ -25,7 +25,6 @@ public class CargarNotas extends javax.swing.JFrame {
 		private List<Alumno> listaAlumnos;
 		private DefaultTableModel modelo;
 		private ArrayList<Materia> listaMaterias;
-		private ArrayList<Inscripcion> listaInscripciones;
 		
 		
 		private InscripcionData insData;
@@ -253,9 +252,9 @@ private void  cargarAlumnos(){
 	}
 
 	private  void armarCabecera(){
-		ArrayList<Object> columnas = new ArrayList<Object>();
-		columnas.add("Codigo");
-		columnas.add("Materia");
+		ArrayList<Object> columnas = new ArrayList<>();
+		columnas.add("idMateria");
+		columnas.add("nombre");
 		columnas.add("Año");
 		columnas.add("Nota");
 		
@@ -280,23 +279,40 @@ private void  cargarAlumnos(){
 	}
 	
 	public void cargaDatosdeNota(){
-		
-	       
-         borrarFilas();
+	 borrarFilas();
     InscripcionData inscripcionData = new InscripcionData();
-    
+
     // Obtener el alumno seleccionado del combo box
     Alumno alumnoSeleccionado = (Alumno) cbxAlumno.getSelectedItem();
-    
-    // Obtener la lista de inscripciones del alumno
-    List<Inscripcion> inscripciones = inscripcionData.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
-    
-    for (Inscripcion inscripcion : inscripciones) {
-        Materia materia = inscripcion.getMateria();
-        double nota = inscripcion.getNota();  // Obtener la nota de la inscripción
+
+    // Verificar si se seleccionó un alumno
+    if (alumnoSeleccionado != null) {
+         System.out.println(alumnoSeleccionado.getIdAlumno()+alumnoSeleccionado.getApellido());
+	
+        List<Inscripcion> inscripciones = inscripcionData.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
+
+		for (Inscripcion inscripcion : inscripciones) {
+		Materia materia = inscripcion.getMateria();
+		
+		double nota = inscripcion.getNota();  // Obtener la nota de la inscripción
+ System.out.println(insData.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getDni()));
+		if (materia != null) {
+			modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), nota});
+			
+		}else {
         
-        modelo.addRow(new Object[]{materia.getIdMateria(), materia.getAnio(), materia.getNombre(), nota});
+	}
+        }
+    } else {
+        System.out.println("Ningún alumno seleccionado.");
     }
 
 }
+	
+	
+	
+	
+	
+	
+	
 }

@@ -23,28 +23,30 @@ public MateriaData(){
     }
 
  public Materia buscarMateria(int id){
-         String sql = "SELECT nombre, anio FROM materia WHERE idAlumno = ? AND estado=1";
-         Materia materia = null;
-         try {
-            PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs=ps.executeQuery();
-             if (rs.next()) {
-                 
-                 materia = new Materia();
-                 materia.setIdMateria(id);                 
-                 materia.setNombre("nombre");
-		 materia.setAnio(rs.getInt("año"));
-                 materia.setActivo(true);
-             }else{
-                 JOptionPane.showMessageDialog(null,"La materia no existe.");
-             }
-                 ps.close();
-             
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla de materia.");
+        String sql = "SELECT nombre, anio FROM materia WHERE idMateria = ? AND estado = 1";
+    Materia materia = null;
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            materia = new Materia();
+            materia.setIdMateria(id);
+            materia.setNombre(rs.getString("nombre"));
+            materia.setAnio(rs.getInt("anio"));
+            materia.setActivo(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "La materia no existe.");
         }
-         return materia;
+
+        ps.close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de materia: " + e.getMessage());
+    }
+	
+    return materia;
     }
  
 
