@@ -80,7 +80,7 @@ public class Materia {
 
 	@Override
 	public String toString() {
-		return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anio=" + anio + ", activo=" + activo + '}';
+		return "Materia{" + idMateria + nombre + anio + activo + '}';
 	}
     
     

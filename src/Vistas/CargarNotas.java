@@ -25,6 +25,7 @@ public class CargarNotas extends javax.swing.JFrame {
 		private List<Alumno> listaAlumnos;
 		private DefaultTableModel modelo;
 		private ArrayList<Materia> listaMaterias;
+		private List<Inscripcion> listaInscripciones;
 		
 		
 		private InscripcionData insData;
@@ -33,10 +34,9 @@ public class CargarNotas extends javax.swing.JFrame {
 		initComponents();
 		aluData=new AlumnoData();
 		modelo = new DefaultTableModel();
-		listaAlumnos =(List<Alumno>) aluData.listarAlumnos();
+		listaAlumnos = (List<Alumno>) aluData.listarAlumnos();
 		
 		insData = new InscripcionData();
-//		listaInscripciones = (ArrayList<Inscripcion >) insData.obtenerMateriasNotas();
 		materiaData = new MateriaData();
 		cargarAlumnos();
 		armarCabecera();
@@ -280,37 +280,34 @@ private void  cargarAlumnos(){
 	
 	public void cargaDatosdeNota(){
 	 borrarFilas();
-    InscripcionData inscripcionData = new InscripcionData();
+    InscripcionData cdn = new InscripcionData();
 
     // Obtener el alumno seleccionado del combo box
     Alumno alumnoSeleccionado = (Alumno) cbxAlumno.getSelectedItem();
-
-    // Verificar si se seleccionó un alumno
-    if (alumnoSeleccionado != null) {
-         System.out.println(alumnoSeleccionado.getIdAlumno()+alumnoSeleccionado.getApellido());
-	
-        List<Inscripcion> inscripciones = inscripcionData.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
-
-		for (Inscripcion inscripcion : inscripciones) {
-		Materia materia = inscripcion.getMateria();
-		
-		double nota = inscripcion.getNota();  // Obtener la nota de la inscripción
- System.out.println(insData.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getDni()));
-		if (materia != null) {
-			modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), nota});
-			
-		}else {
+	listaInscripciones = (ArrayList)cdn.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
+		 System.out.println(listaInscripciones);
+    for(Inscripcion i:listaInscripciones){
         
-	}
-        }
-    } else {
-        System.out.println("Ningún alumno seleccionado.");
-    }
+            modelo.addRow(new Object[]{i.getIdInscripcion(),i.getMateria(),i.getNota()});
+		}
 
 }
 	
-	
-	
+//	
+//	public void cargaDatosInscriptas(){
+//        borrarFilas();
+//        //Llenar filas
+//        InscripcionData cd =new InscripcionData();
+//        Alumno seleccionado=(Alumno)cbxAlumnos.getSelectedItem();
+//        listaMaterias = (ArrayList)cd.obtenerMateriasInscriptas(seleccionado.getIdAlumno());
+//        
+//        for(Materia m:listaMaterias){
+//        
+//            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombre(), m.getAnio()});
+//		}
+//	}
+//	
+//
 	
 	
 	
