@@ -288,7 +288,7 @@ private void  cargarAlumnos(){
 		 System.out.println(listaInscripciones);
     for(Inscripcion i:listaInscripciones){
         
-            modelo.addRow(new Object[]{i.getIdInscripcion(),i.getMateria(),i.getNota()});
+            modelo.addRow(new Object[]{i.getIdInscripcion(i.getMateria(),i.getNota()});
 		}
 
 }
