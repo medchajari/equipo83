@@ -304,16 +304,19 @@ public class Materias extends javax.swing.JFrame {
         }//GEN-LAST:event_btnNuevaMateriaActionPerformed
 
         private void btnGuardarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMateriaActionPerformed
-                // TODO add your handling code here:
-		int id=Integer.parseInt(txtId.getText());
-		String anio=txtAnio.getText();
-		String nombre=txtNombre.getText();
-		
+                // TODO add your handling code here:		
 	
-		boolean estado = radioActiva.isEnabled();
-                Materia materia = new Materia(id, nombre, anio , estado);
-                materiaData.guardarMateria(materia);
-		limpiarCampos();
+            if (txtNombre.getText().isEmpty() || txtAnio.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
+                return;  // No continuar si falta algún campo
+                }    
+                
+            String nombre=txtNombre.getText();
+            int anio=Integer.parseInt(txtAnio.getText());
+            boolean estado = radioActiva.isEnabled();
+            Materia materia = new Materia(nombre, anio , estado);
+            materiaData.guardarMateria(materia);
+            limpiarCampos();
 		
         }//GEN-LAST:event_btnGuardarMateriaActionPerformed
 

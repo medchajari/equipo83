@@ -25,7 +25,7 @@ public MateriaData(){
         con=Conexion.getConexion();    
     }
 
-  public void guardarMateria(Materia materia){
+public void guardarMateria(Materia materia){
         //consulta para insertar datos
         String sql = "INSERT INTO materia (nombre, anio, estado) VALUE(?,?,?)";
         
@@ -34,7 +34,7 @@ public MateriaData(){
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
             ps.setBoolean(3, materia.isActivo());
-                        
+            
             //ejecutamos, enviamos los datos
             ps.executeUpdate();
             
@@ -57,10 +57,9 @@ public MateriaData(){
         }
     
     }
-
  //eliminarMateria
     public void eliminarMateria (int id){
-                                        //modificamos el estado del alumno a 0
+                                        //modificamos el estado de la  materiaalumno a 0
         String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
         
         try {
@@ -110,15 +109,13 @@ public MateriaData(){
     public void modificarMateria(Materia materia){
     //consulta actualizar datos     
     // TABLA(materia) MODIFICAR      SET: LOS DATOS A MODIFICAR                     WHERE: Condicion
-    String sql = "UPDATE materia SET idMateria=?, nombre=?, anio=? WHERE idMateria = ?";
+    String sql = "UPDATE materia SET nombre=?, anio=? WHERE idMateria = ?";
     
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, materia.getIdMateria());
-            ps.setString(2, materia.getNombre());
-            ps.setInt(3, materia.getAnio());            
-            ps.setBoolean(4, materia.isActivo());
-            
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnio());                        
+            ps.setInt(3, materia.getIdMateria());
             
             int exito = ps.executeUpdate();
             if(exito==1){
@@ -127,10 +124,9 @@ public MateriaData(){
             
             
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error al tratar de acceder a la tabla Materia.");
+             JOptionPane.showMessageDialog(null, "Error al tratar de acceder a la tabla Alumno.");
         }
     
     }
-
 
 }
