@@ -167,7 +167,7 @@ public class InscripcionData {
 			   Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
 			   inscripcion.setAlumno(alu);
 			   
-			   Materia mat=md.buscarMateria(rs.getInt("idMateria"));			   
+			   Materia mat=md.buscarMateriaPorId(rs.getInt("idMateria"));			   
 			   inscripcion.setMateria(mat);
 			   
 			   inscripcion.setNota(rs.getDouble("nota"));
@@ -285,7 +285,7 @@ public class InscripcionData {
 			   Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
 			   inscripcion.setAlumno(alu);
 			   
-			   Materia mat=md.buscarMateria(rs.getInt("idMateria"));			   
+			   Materia mat=md.buscarMateriaPorId(rs.getInt("idMateria"));			   
 			   inscripcion.setMateria(mat);
 			   
 			   inscripcion.setNota(rs.getDouble("nota"));
@@ -317,7 +317,7 @@ public class InscripcionData {
             double nota = rs.getDouble("nota");
 
             // Obtener la materia y el alumno
-            Materia materia = md.buscarMateria(idMateria);
+            Materia materia = md.buscarMateriaPorId(idMateria);
             Alumno alumno = ad.buscarAlumno(idAlumno);
 
             // Crear una instancia de Inscripcion y agregar a la lista

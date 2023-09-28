@@ -128,5 +128,30 @@ public void guardarMateria(Materia materia){
         }
     
     }
+    
+      public ArrayList <Materia> listarMaterias(){
+         
+         ArrayList <Materia> materias = new ArrayList<>();
+	 String sql = "SELECT * FROM materia WHERE estado=1 ORDER BY nombre";
+         try {
+            PreparedStatement ps=con.prepareStatement(sql);            
+            ResultSet rs=ps.executeQuery();
+             while(rs.next()) {
+                 
+                 Materia materia = new Materia();
+                 materia.setIdMateria(rs.getInt("idMateria"));
+                 materia.setNombre("nombre");
+                 materia.setAnio(rs.getInt("anio"));
+               
+                 
+                 materias.add(materia);
+             }
+                 ps.close();
+             
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"(45)Error al acceder a la tabla de materia.");
+        }
+         return materias;
+    }
 
 }
