@@ -95,7 +95,7 @@ public class CargarNotas extends javax.swing.JFrame {
                 ));
                 jScrollPane1.setViewportView(tablaNotas);
 
-                btnGuardar.setText("Guardar");
+                btnGuardar.setText("Editar Nota");
                 btnGuardar.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 btnGuardarActionPerformed(evt);
@@ -103,6 +103,11 @@ public class CargarNotas extends javax.swing.JFrame {
                 });
 
                 btnSalir.setText("Salir");
+                btnSalir.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btnSalirActionPerformed(evt);
+                        }
+                });
 
                 jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
 
@@ -198,6 +203,10 @@ public class CargarNotas extends javax.swing.JFrame {
     }
         }//GEN-LAST:event_btnGuardarActionPerformed
 
+        private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+dispose();                // TODO add your handling code here:
+        }//GEN-LAST:event_btnSalirActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -258,7 +267,6 @@ private void  cargarAlumnos(){
 		columnas.add("idMateria");
 		columnas.add("nombre");
 		columnas.add("Año");
-		columnas.add("Nota");
 		
 		//recorrer arreglo y uso eso de titulo
 		
@@ -290,7 +298,7 @@ private void  cargarAlumnos(){
         listaMaterias = (ArrayList)cd.obtenerMateriasInscriptas(seleccionado.getIdAlumno());
         for(Materia m:listaMaterias){
         
-            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombre(), m.getAnio(), insData.cargarNotas(WIDTH) });
+            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombre(), m.getAnio() });
 		}
   
 
