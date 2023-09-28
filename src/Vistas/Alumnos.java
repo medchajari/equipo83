@@ -301,7 +301,12 @@ public class Alumnos extends javax.swing.JFrame {
         }//GEN-LAST:event_btnNuevoAlumnoActionPerformed
 
         private void btnGuardarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAlumnoActionPerformed
-                // TODO add your handling code here:
+                // TODO add your h
+		
+		 if (txtDni.getText().isEmpty() || txtApellido.getText().isEmpty() || txtNombre.getText().isEmpty() || dateFechaNacimiento.getDate() == null) {
+        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
+        return;  // No continuar si falta algún campo
+    }
 		int dni=Integer.parseInt(txtDni.getText());
 		String apellido=txtApellido.getText();
 		String nombre=txtNombre.getText();

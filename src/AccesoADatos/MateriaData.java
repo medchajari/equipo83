@@ -110,7 +110,7 @@ public MateriaData(){
     public void modificarMateria(Materia materia){
     //consulta actualizar datos     
     // TABLA(materia) MODIFICAR      SET: LOS DATOS A MODIFICAR                     WHERE: Condicion
-    String sql = "UPDATE materia SET idMateria=?, nombre=?, anio=? WHERE idMateria = ?";
+    String sql = "UPDATE materia SET nombre=?, anio=? WHERE idMateria = ?";
     
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -130,6 +130,31 @@ public MateriaData(){
              JOptionPane.showMessageDialog(null, "Error al tratar de acceder a la tabla Materia.");
         }
     
+    }
+    
+      public ArrayList <Materia> listarMaterias(){
+         
+         ArrayList <Materia> materias = new ArrayList<>();
+	 String sql = "SELECT * FROM materia WHERE estado=1 ORDER BY nombre";
+         try {
+            PreparedStatement ps=con.prepareStatement(sql);            
+            ResultSet rs=ps.executeQuery();
+             while(rs.next()) {
+                 
+                 Materia materia = new Materia();
+                 materia.setIdMateria(rs.getInt("idMateria"));
+                 materia.setNombre("nombre");
+                 materia.setAnio(rs.getInt("anio"));
+               
+                 
+                 materias.add(materia);
+             }
+                 ps.close();
+             
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"(45)Error al acceder a la tabla de materia.");
+        }
+         return materias;
     }
 
 

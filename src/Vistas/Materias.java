@@ -305,13 +305,12 @@ public class Materias extends javax.swing.JFrame {
 
         private void btnGuardarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMateriaActionPerformed
                 // TODO add your handling code here:
-		int id=Integer.parseInt(txtId.getText());
-		String anio=txtAnio.getText();
+		int anio=Integer.parseInt(txtAnio.getText());
 		String nombre=txtNombre.getText();
 		
 	
 		boolean estado = radioActiva.isEnabled();
-                Materia materia = new Materia(id, nombre, anio , estado);
+                Materia materia = new Materia( nombre, anio , estado);
                 materiaData.guardarMateria(materia);
 		limpiarCampos();
 		
@@ -320,7 +319,6 @@ public class Materias extends javax.swing.JFrame {
         private void btnModificarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMateriaActionPerformed
                 // TODO add your handling code here:
 		if (materia != null) {
-                    int id = Integer.parseInt(txtId.getText());
                     String nombre = txtNombre.getText();
                     int anio = Integer.parseInt(txtAnio.getText());
 
@@ -329,7 +327,7 @@ public class Materias extends javax.swing.JFrame {
                     boolean estado = radioActiva.isEnabled();
 
                     // Obtener el objeto Materia a modificar y obtener su ID
-                    Materia materiaModificada = new Materia(id, nombre, anio, estado);
+                    Materia materiaModificada = new Materia( nombre, anio, estado);
                     materiaModificada.setIdMateria(materia.getIdMateria());  // Aquí se obtiene el ID de la materia a modificar desde el objeto materia
     
                     // Llamar al método modificarMateria de MateriaData para aplicar la modificación

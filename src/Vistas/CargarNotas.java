@@ -35,6 +35,7 @@ public class CargarNotas extends javax.swing.JFrame {
 		aluData=new AlumnoData();
 		modelo = new DefaultTableModel();
 		listaAlumnos = (List<Alumno>) aluData.listarAlumnos();
+		listaMaterias = (ArrayList<Materia>) materiaData.listarMaterias();
 		
 		insData = new InscripcionData();
 		materiaData = new MateriaData();
@@ -62,6 +63,7 @@ public class CargarNotas extends javax.swing.JFrame {
                 btnGuardar = new javax.swing.JButton();
                 btnSalir = new javax.swing.JButton();
                 jLabel3 = new javax.swing.JLabel();
+                cbxMateria = new javax.swing.JComboBox<>();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +112,13 @@ public class CargarNotas extends javax.swing.JFrame {
                         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(139, 139, 139)
+                                                .addComponent(jLabel1))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(76, 76, 76)
+                                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(33, 33, 33)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -119,14 +128,8 @@ public class CargarNotas extends javax.swing.JFrame {
                                                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(cbxAlumno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(139, 139, 139)
-                                                .addComponent(jLabel1))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(76, 76, 76)
-                                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                        .addComponent(cbxMateria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(43, Short.MAX_VALUE))
                 );
                 jPanel1Layout.setVerticalGroup(
@@ -142,8 +145,10 @@ public class CargarNotas extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(cbxMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,6 +240,7 @@ public class CargarNotas extends javax.swing.JFrame {
         private javax.swing.JButton btnGuardar;
         private javax.swing.JButton btnSalir;
         private javax.swing.JComboBox<Alumno> cbxAlumno;
+        private javax.swing.JComboBox<String> cbxMateria;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
         private javax.swing.JLabel jLabel3;
@@ -284,13 +290,21 @@ private void  cargarAlumnos(){
 
     // Obtener el alumno seleccionado del combo box
     Alumno alumnoSeleccionado = (Alumno) cbxAlumno.getSelectedItem();
-	listaInscripciones = (ArrayList)cdn.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
-		 System.out.println(listaInscripciones);
-    for(Inscripcion i:listaInscripciones){
-        
-            modelo.addRow(new Object[]{i.getIdInscripcion(i.getMateria(),i.getNota()});
-		}
+    Materia materiaSeleccionada = (Materia) cbxMateria.getSelectedItem();
+    // Obtener la idMateria seleccionada del combo box
+    
+    int idMateria = materiaSeleccionada.getIdMateria();
 
+    listaInscripciones = (ArrayList) cdn.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
+
+    for (Inscripcion i : listaInscripciones) {
+        // Verificar si la inscripción corresponde a la materia seleccionada
+        if (i.getMateria().getIdMateria() == idMateria) {
+            modelo.addRow(new Object[]{i.getIdInscripcion(), i.getAlumno(), i.getMateria(), i.getNota()});
+        }
+    }
+
+}
 }
 	
 //	
@@ -312,4 +326,4 @@ private void  cargarAlumnos(){
 	
 	
 	
-}
+
