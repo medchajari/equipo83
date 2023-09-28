@@ -1,10 +1,9 @@
-
 package equipo83;
 
 import AccesoADatos.Conexion;
 import java.sql.Connection;
 
-
+//equiop83
 public class Equipo83 {
 
 	
