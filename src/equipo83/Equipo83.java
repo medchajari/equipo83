@@ -1,11 +1,7 @@
 
 package equipo83;
 
-import AccesoADatos.AlumnoData;
 import AccesoADatos.Conexion;
-import AccesoADatos.InscripcionData;
-import Entidades.Alumno;
-import Entidades.Inscripcion;
 import java.sql.Connection;
 
 
@@ -14,6 +10,9 @@ public class Equipo83 {
 	
 	public static void main(String[] args) {
 		Connection con=Conexion.getConexion();
+		
+		menu men = new menu();
+			    men.setVisible(true);
                 
 //                ---Alumno Juan=new Alumno(33011644,"Perez","Juan", LocalDate.of(1987, 5, 15), true);
 //                AlumnoData alu = new AlumnoData();
@@ -32,11 +31,11 @@ public class Equipo83 {
 //                    }
 
 			/// --- inscribir
-			InscripcionData ins = new InscripcionData();
-//			Inscripcion tin=new Inscripcion(2, 1, 5.5);
-//			ins.inscribir(tin);
-
-ins.obtenerInscripcionesPorAlumno(5);
+//			InscripcionData ins = new InscripcionData();
+////			Inscripcion tin=new Inscripcion(2, 1, 5.5);
+////			ins.inscribir(tin);
+//
+//ins.obtenerInscripcionesPorAlumno(5);
 
 			
 			//---fin de inscribir
