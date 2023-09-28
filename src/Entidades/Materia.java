@@ -9,7 +9,7 @@ public class Materia {
     private boolean activo;
 
 	public Materia() {
-	}
+	}//vacio
 
 	public Materia(String nombre, int anio, boolean activo) {
 		this.nombre = nombre;
@@ -23,7 +23,8 @@ public class Materia {
 		this.anio = anio;
 		this.activo = activo;
 	}
-
+        //getter y setter
+        
 	public int getIdMateria() {
 		return idMateria;
 	}
@@ -54,28 +55,6 @@ public class Materia {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = 3;
-		hash = 79 * hash + this.idMateria;
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final Materia other = (Materia) obj;
-		return this.idMateria == other.idMateria;
 	}
 
 	@Override

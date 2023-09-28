@@ -2,7 +2,6 @@
 package AccesoADatos;
 
 import Entidades.Alumno;
-import Entidades.Materia;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

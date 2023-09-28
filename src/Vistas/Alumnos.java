@@ -321,7 +321,7 @@ public class Alumnos extends javax.swing.JFrame {
         private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
                 // TODO add your handling code here:
 		if (alumno != null) {
-		 int dni = Integer.parseInt(txtDni.getText());
+		int dni = Integer.parseInt(txtDni.getText());
 		String apellido = txtApellido.getText();
 		String nombre = txtNombre.getText();
     
