@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -341,6 +343,39 @@ public class InscripcionData {
 }
 	
 	
+    public List<Inscripcion> cargarNotas(int idAlumno){
+	    
+	    List<Inscripcion> inscripciones = new ArrayList<>();
+		try {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "SELECT alumno.nombre, inscripcion.nota, materia.nombre FROM alumno INNER JOIN inscripcion ON alumno.idAlumno = inscripcion.idAlumno INNER JOIN materia ON inscripcion.idMateria = materia.idMateria;";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idAlumno);
+			 rs = ps.executeQuery();
+			 
+			 while (rs.next()) {
+            int idInscripcion = rs.getInt("nombre");
+	    double nota = rs.getDouble("nota");
+            int idMateria = rs.getInt("materia");
+            
+
+            // Obtener la materia y el alumno
+            Materia materia = md.buscarMateriaPorId(idMateria);
+            Alumno alumno = ad.buscarAlumno(idAlumno);
+	    
+
+            Inscripcion inscripcion = new Inscripcion(idInscripcion, materia, alumno, nota);
+            inscripciones.add(inscripcion);
+        }
+			
+			
+		} catch (SQLException ex) {
+			
+		}
+	    return inscripciones;
+	    
     
+    }
     
 }

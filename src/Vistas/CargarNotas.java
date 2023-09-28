@@ -24,7 +24,7 @@ public class CargarNotas extends javax.swing.JFrame {
 	private AlumnoData aluData;
 		private List<Alumno> listaAlumnos;
 		private DefaultTableModel modelo;
-		private ArrayList<Materia> listaMaterias;
+		private List<Materia> listaMaterias;
 		private List<Inscripcion> listaInscripciones;
 		
 		
@@ -33,12 +33,13 @@ public class CargarNotas extends javax.swing.JFrame {
 	public CargarNotas() {
 		initComponents();
 		aluData=new AlumnoData();
+		materiaData = new MateriaData();
 		modelo = new DefaultTableModel();
 		listaAlumnos = (List<Alumno>) aluData.listarAlumnos();
-		listaMaterias = (ArrayList<Materia>) materiaData.listarMaterias();
+		listaMaterias = (List<Materia>) materiaData.listarMaterias();
 		
 		insData = new InscripcionData();
-		materiaData = new MateriaData();
+		
 		cargarAlumnos();
 		armarCabecera();
 		cargaDatosdeNota();
@@ -63,7 +64,6 @@ public class CargarNotas extends javax.swing.JFrame {
                 btnGuardar = new javax.swing.JButton();
                 btnSalir = new javax.swing.JButton();
                 jLabel3 = new javax.swing.JLabel();
-                cbxMateria = new javax.swing.JComboBox<>();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,8 +128,7 @@ public class CargarNotas extends javax.swing.JFrame {
                                                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(cbxAlumno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                        .addComponent(cbxMateria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                                 .addContainerGap(43, Short.MAX_VALUE))
                 );
                 jPanel1Layout.setVerticalGroup(
@@ -145,9 +144,7 @@ public class CargarNotas extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(cbxMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -240,7 +237,6 @@ public class CargarNotas extends javax.swing.JFrame {
         private javax.swing.JButton btnGuardar;
         private javax.swing.JButton btnSalir;
         private javax.swing.JComboBox<Alumno> cbxAlumno;
-        private javax.swing.JComboBox<String> cbxMateria;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
         private javax.swing.JLabel jLabel3;
@@ -286,23 +282,17 @@ private void  cargarAlumnos(){
 	
 	public void cargaDatosdeNota(){
 	 borrarFilas();
-    InscripcionData cdn = new InscripcionData();
-
-    // Obtener el alumno seleccionado del combo box
-    Alumno alumnoSeleccionado = (Alumno) cbxAlumno.getSelectedItem();
-    Materia materiaSeleccionada = (Materia) cbxMateria.getSelectedItem();
-    // Obtener la idMateria seleccionada del combo box
-    
-    int idMateria = materiaSeleccionada.getIdMateria();
-
-    listaInscripciones = (ArrayList) cdn.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
-
-    for (Inscripcion i : listaInscripciones) {
-        // Verificar si la inscripción corresponde a la materia seleccionada
-        if (i.getMateria().getIdMateria() == idMateria) {
-            modelo.addRow(new Object[]{i.getIdInscripcion(), i.getAlumno(), i.getMateria(), i.getNota()});
-        }
-    }
+   
+ 
+        //Llenar filas
+        InscripcionData cd =new InscripcionData();
+        Alumno seleccionado=(Alumno)cbxAlumno.getSelectedItem();
+        listaMaterias = (ArrayList)cd.obtenerMateriasInscriptas(seleccionado.getIdAlumno());
+        for(Materia m:listaMaterias){
+        
+            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombre(), m.getAnio(), insData.cargarNotas(WIDTH) });
+		}
+  
 
 }
 }
